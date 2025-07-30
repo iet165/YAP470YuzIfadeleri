@@ -29,11 +29,7 @@ Eğitim sürecinde, zorunlu modellerden biri olan Multi-Layer Perceptron (MLP) i
 
 
 
-2.Projede RandomTree'nin train dosyası GitHub dosya limitini aştığı için veri setleriyle beraber bu linktedir:
+2.Projede RandomTree'nin train dosyası GitHub dosya limitini aştığı için bu linktedir:
 
 https://drive.google.com/drive/folders/1cB\_A\_MKyyXvOB-XMD6pjUIqYUEBDBXsQ
-
-
-
-
 
