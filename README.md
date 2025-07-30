@@ -1,5 +1,7 @@
 # YAP470YuzIfadeleri
+
 Yüz İfadelerinin Sınıflandırılması ve Gerçek Zamanlı Tahmini
+
 
 
 Veri Hazırlama
@@ -9,7 +11,7 @@ Split ve Generator Yaratımı
 Verileri eğitim, doğrulama ve test olarak üçe böldüm. Bu işlemi yaparken sınıf dengesi korunması için stratify parametresini kullandım. Görüntüleri modele uygun hale getirmek ve çeşitlendirmek için TensorFlow’un ImageDataGenerator sınıfını kullandım. Eğitim sırasında veri artırma (data augmentation) uygulandı. Eğitim setinde veriler karıştırılıyor, doğrulama ve test setlerinde ise sıralı şekilde kullanılıyor.
 
 Model Tasarımı ve Eğitimi
-Evrişimli Sinir Ağı (CNN) modelimi sıfırdan kendim tasarladım ve Sequential API kullanarak oluşturdum. Modelin içinde birden fazla Conv2D ve BatchNormalization katmanı var. Aşırı öğrenmeyi (overfitting) önlemek için Dropout katmanları ekledim. Modeli Adam optimizer ile derledim ve sınıflandırma problemi olduğu için categorical_crossentropy kayıp fonksiyonu kullandım. Eğitim süresince erken durdurma (EarlyStopping) ve en iyi modeli kaydetme (ModelCheckpoint) gibi callback’lerden faydalandım. Böylece eğitim sırasında modelin en iyi ağırlıkları otomatik olarak kayıt altına alındı.
+Evrişimli Sinir Ağı (CNN) modelimi sıfırdan kendim tasarladım ve Sequential API kullanarak oluşturdum. Modelin içinde birden fazla Conv2D ve BatchNormalization katmanı var. Aşırı öğrenmeyi (overfitting) önlemek için Dropout katmanları ekledim. Modeli Adam optimizer ile derledim ve sınıflandırma problemi olduğu için categorical\_crossentropy kayıp fonksiyonu kullandım. Eğitim süresince erken durdurma (EarlyStopping) ve en iyi modeli kaydetme (ModelCheckpoint) gibi callback’lerden faydalandım. Böylece eğitim sırasında modelin en iyi ağırlıkları otomatik olarak kayıt altına alındı.
 
 Gerçek Zamanlı Demo
 Web kamerası üzerinden yüz tanıma ve duygu tahmini yapan bir demo hazırladım. OpenCV kütüphanesini kullanarak görüntü akışını aldım, yüzleri Haar Cascade yöntemiyle tespit ettim. Algılanan yüzler modele uygun hale getirilip sınıflandırıldı ve tahmin edilen duygu etiketi ekran üzerinde gösterildi.
@@ -22,6 +24,16 @@ Bu projenin ikinci kısmında,FANE veri setindeki ham görüntüler, öncelikle 
 Proje gereksinimleri doğrultusunda, hazırlanan bu veri üzerinde üç farklı makine öğrenmesi modeli eğitilmiş ve GridSearchCV ile en iyi hiperparametreleri bulunmuştur. Bu modeller; yüksek boyutlu verilerdeki gücüyle bilinen Support Vector Machine (SVM), karar ağaçlarından oluşan ve aşırı öğrenmeye karşı dayanıklı olan Random Forest ve önceki ağaçların hatalarından öğrenerek kendini geliştiren yüksek performanslı bir boosting algoritması olan XGBoost'tur. Her bir model, kendi doğasına uygun parametre setleri ile optimize edilerek, veri setimiz için mümkün olan en iyi performansı sergilemesi hedeflenmiştir. Bu çoklu model yaklaşımı, problemin farklı açılardan ele alınmasını ve en sağlam çözümün bulunmasını sağlamıştır.
 
 Eğitim sürecinde, zorunlu modellerden biri olan Multi-Layer Perceptron (MLP) ile çalışılırken önemli bir teknik zorlukla karşılaşılmıştır. HOG özniteliklerinin "seyrek" ve "sıfır ağırlıklı" yapısı, MLP modelinde sayısal kararsızlığa yol açarak "gradient explosion" (patlayan gradyanlar) sorununu tetiklemiştir. Bu durum, modelin anlamlı bir öğrenme gerçekleştiremeden çökmesine veya eğitimi anında sonlandırmasına neden olmuştur. Bu sorunu aşmak ve projenin ilerleyişini sağlamak adına, geçici bir strateji olarak MLP modeli, veri yapısıyla daha uyumlu olan Random Forest ile değiştirilmiştir. Demo aşamasına kadar, MLP'deki bu sorunu çözmek için alternatif veri normalleştirme teknikleri ve daha kararlı optimizer yapılandırmaları üzerinde çalışmalara devam edilmesi planlanmaktadır.
+
+
+
+
+
+2.Projede RandomTree'nin train dosyası GitHub dosya limitini aştığı için veri setleriyle beraber bu linktedir:
+
+https://drive.google.com/drive/folders/1cB\_A\_MKyyXvOB-XMD6pjUIqYUEBDBXsQ
+
+
 
 
 
